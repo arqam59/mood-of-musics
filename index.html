@@ -20,9 +20,9 @@
       --player-bg: #181818;
       --progress: #535353;
     }
- 
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     body {
       font-family: 'DM Sans', -apple-system, sans-serif;
       background: var(--black);
@@ -33,7 +33,7 @@
       overflow: hidden;
       user-select: none;
     }
- 
+
     .layout {
       display: flex;
       flex: 1;
@@ -41,7 +41,7 @@
       gap: 8px;
       padding: 8px 8px 0;
     }
- 
+
     /* ── Sidebar ── */
     .sidebar {
       width: 280px;
@@ -52,14 +52,14 @@
       flex-direction: column;
       overflow: hidden;
     }
- 
+
     .logo {
       padding: 20px 20px 8px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
- 
+
     .logo-icon {
       width: 36px; height: 36px;
       background: var(--green);
@@ -67,11 +67,11 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; flex-shrink: 0;
     }
- 
+
     .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -.5px; }
- 
+
     .nav { padding: 12px 8px; }
- 
+
     .nav-item {
       display: flex; align-items: center; gap: 14px;
       padding: 10px 14px; border-radius: 6px;
@@ -80,20 +80,20 @@
     }
     .nav-item:hover { color: var(--text); }
     .nav-item.active { color: var(--text); }
- 
+
     .nav-icon {
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
       background: var(--card); border-radius: 4px; font-size: 14px;
     }
     .nav-item.active .nav-icon { background: var(--green); color: #000; }
- 
+
     .library-header {
       padding: 8px 14px 4px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .library-title { font-size: 13px; font-weight: 600; color: var(--text-sub); letter-spacing: .03em; }
- 
+
     .admin-lock-btn {
       width: 28px; height: 28px;
       display: flex; align-items: center; justify-content: center;
@@ -103,55 +103,55 @@
     }
     .admin-lock-btn:hover { color: var(--text); background: var(--card); }
     .admin-lock-btn.unlocked { color: var(--green); }
- 
+
     .playlist-list { flex: 1; overflow-y: auto; padding: 4px 8px 12px; }
     .playlist-list::-webkit-scrollbar { width: 4px; }
     .playlist-list::-webkit-scrollbar-thumb { background: #404040; border-radius: 2px; }
- 
+
     .playlist-row {
       display: flex; align-items: center; gap: 12px;
       padding: 8px 10px; border-radius: 6px; cursor: pointer;
       transition: background .12s;
     }
     .playlist-row:hover, .playlist-row.active { background: var(--card); }
- 
+
     .playlist-art {
       width: 42px; height: 42px; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; flex-shrink: 0;
     }
- 
+
     .playlist-info { min-width: 0; }
     .playlist-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .playlist-meta { font-size: 11px; color: var(--text-sub); margin-top: 1px; }
- 
+
     /* ── Main ── */
     .main {
       flex: 1; background: var(--dark); border-radius: 10px;
       display: flex; flex-direction: column; overflow: hidden;
     }
- 
+
     .main-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 16px 22px;
       background: linear-gradient(180deg, rgba(255,255,255,.05) 0%, transparent 100%);
       flex-shrink: 0; gap: 12px;
     }
- 
+
     .main-title { font-size: 22px; font-weight: 700; }
     .header-actions { display: flex; align-items: center; gap: 8px; }
- 
+
     .status-pill {
       display: flex; align-items: center; gap: 6px;
       padding: 5px 12px; background: var(--card);
       border-radius: 500px; font-size: 12px; color: var(--text-sub);
     }
- 
+
     .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #535353; flex-shrink: 0; transition: background .3s; }
     .status-dot.green { background: var(--green); box-shadow: 0 0 6px var(--green); }
     .status-dot.red { background: #e24b4a; }
     .status-dot.yellow { background: #f59e0b; }
- 
+
     .btn {
       display: flex; align-items: center; gap: 7px;
       padding: 8px 18px; border-radius: 500px;
@@ -164,14 +164,14 @@
     .btn-green:hover { background: var(--green-hover); }
     .btn-outline { background: transparent; color: var(--text); border: 1px solid #535353; }
     .btn-outline:hover { border-color: var(--text); }
- 
+
     .admin-badge {
       display: flex; align-items: center; gap: 6px;
       padding: 5px 12px; background: rgba(29,185,84,.15);
       border: 1px solid rgba(29,185,84,.3);
       border-radius: 500px; font-size: 12px; color: var(--green); font-weight: 600;
     }
- 
+
     .logout-btn {
       padding: 5px 12px; border-radius: 500px;
       font-size: 12px; font-weight: 600; cursor: pointer;
@@ -179,7 +179,7 @@
       color: var(--green); font-family: inherit; transition: background .15s;
     }
     .logout-btn:hover { background: rgba(29,185,84,.1); }
- 
+
     /* Table header — now with download column */
     .table-header {
       display: grid;
@@ -191,12 +191,12 @@
     .th { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: .07em; text-transform: uppercase; }
     .th.center { text-align: center; }
     .th.right { text-align: right; }
- 
+
     /* Track list */
     .track-list { flex: 1; overflow-y: auto; padding: 4px 12px 16px; }
     .track-list::-webkit-scrollbar { width: 4px; }
     .track-list::-webkit-scrollbar-thumb { background: #404040; border-radius: 2px; }
- 
+
     .track-row {
       display: grid;
       grid-template-columns: 48px 1fr 110px 36px 60px;
@@ -207,7 +207,7 @@
     }
     .track-row:hover { background: rgba(255,255,255,.07); }
     .track-row.playing { background: rgba(29,185,84,.1); }
- 
+
     .track-num {
       font-size: 13px; color: var(--text-sub);
       display: flex; align-items: center; justify-content: center;
@@ -216,21 +216,21 @@
     .track-row:hover .track-num .t-num { display: none; }
     .track-row:hover .track-num .p-icon { display: block; color: var(--text); }
     .track-row.playing .track-num .t-num { display: none; }
- 
+
     .track-cell { display: flex; align-items: center; gap: 13px; min-width: 0; }
- 
+
     .track-art {
       width: 42px; height: 42px; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 20px; flex-shrink: 0;
     }
- 
+
     .track-info { min-width: 0; }
     .track-name { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .track-name.playing { color: var(--green); }
     .track-artist { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
     .track-date { font-size: 12px; color: var(--text-sub); }
- 
+
     /* Download button — always visible to everyone */
     .dl-btn {
       width: 30px; height: 30px;
@@ -244,9 +244,9 @@
     }
     .track-row:hover .dl-btn { opacity: 1; }
     .dl-btn:hover { color: var(--green); background: rgba(29,185,84,.1); }
- 
+
     .track-actions { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
- 
+
     .del-btn {
       width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
       border-radius: 50%; color: var(--text-sub); cursor: pointer;
@@ -255,7 +255,7 @@
     }
     .track-row:hover .del-btn.admin-visible { opacity: 1; }
     .del-btn:hover { background: var(--card-hover); color: #e24b4a; }
- 
+
     .empty {
       display: flex; flex-direction: column; align-items: center;
       justify-content: center; height: 220px; gap: 14px;
@@ -263,7 +263,7 @@
     .empty-icon { font-size: 48px; opacity: .5; }
     .empty-text { font-size: 20px; font-weight: 700; color: var(--text); }
     .empty-sub { font-size: 14px; color: var(--text-sub); }
- 
+
     .upload-toast {
       margin: 8px 22px 0;
       background: var(--card); border-radius: 8px; padding: 10px 16px;
@@ -271,7 +271,7 @@
     }
     .up-bar { flex: 1; height: 3px; background: #535353; border-radius: 2px; overflow: hidden; }
     .up-fill { height: 100%; background: var(--green); border-radius: 2px; width: 0%; transition: width .2s; }
- 
+
     /* ── Password Modal ── */
     .modal-overlay {
       position: fixed; inset: 0;
@@ -283,7 +283,7 @@
       transition: opacity .2s;
     }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
- 
+
     .modal {
       background: #282828;
       border-radius: 14px;
@@ -295,16 +295,16 @@
       transition: transform .2s;
     }
     .modal-overlay.show .modal { transform: scale(1); }
- 
+
     .modal-icon {
       width: 56px; height: 56px; border-radius: 50%;
       background: rgba(29,185,84,.15); border: 2px solid rgba(29,185,84,.3);
       display: flex; align-items: center; justify-content: center; font-size: 24px;
     }
- 
+
     .modal-title { font-size: 20px; font-weight: 700; color: var(--text); text-align: center; }
     .modal-sub { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: -10px; }
- 
+
     .pw-input {
       width: 100%;
       background: #3e3e3e;
@@ -321,17 +321,17 @@
     }
     .pw-input:focus { border-color: var(--green); }
     .pw-input.error { border-color: #e24b4a; animation: shake .3s; }
- 
+
     @keyframes shake {
       0%,100%{transform:translateX(0)}
       25%{transform:translateX(-8px)}
       75%{transform:translateX(8px)}
     }
- 
+
     .pw-error { font-size: 12px; color: #e24b4a; text-align: center; min-height: 16px; }
- 
+
     .modal-actions { display: flex; gap: 10px; width: 100%; }
- 
+
     .modal-btn {
       flex: 1; padding: 12px; border-radius: 500px;
       font-size: 14px; font-weight: 600; cursor: pointer;
@@ -342,7 +342,7 @@
     .modal-btn.confirm:hover { background: var(--green-hover); }
     .modal-btn.cancel { background: var(--card-hover); color: var(--text); }
     .modal-btn.cancel:hover { background: #555; }
- 
+
     /* ── Player bar ── */
     .player {
       height: 90px; background: #0a0a0a;
@@ -350,22 +350,22 @@
       display: flex; align-items: center;
       padding: 0 20px; gap: 16px; flex-shrink: 0;
     }
- 
+
     .now-playing {
       display: flex; align-items: center; gap: 13px;
       width: 260px; flex-shrink: 0; min-width: 0;
     }
- 
+
     .now-art {
       width: 54px; height: 54px; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 24px; flex-shrink: 0; background: var(--card);
     }
- 
+
     .now-info { min-width: 0; }
     .now-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .now-artist { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
- 
+
     /* Download now-playing button */
     .now-dl-btn {
       font-size: 16px; color: var(--text-sub); cursor: pointer;
@@ -373,16 +373,16 @@
       text-decoration: none; display: flex; align-items: center;
     }
     .now-dl-btn:hover { color: var(--green); }
- 
+
     .heart-btn {
       font-size: 16px; color: var(--text-sub); cursor: pointer;
       flex-shrink: 0; transition: color .15s; background: none; border: none;
     }
     .heart-btn:hover, .heart-btn.liked { color: var(--green); }
- 
+
     .center-controls { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .ctrl-btns { display: flex; align-items: center; gap: 8px; }
- 
+
     .ctrl {
       width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
       border: none; background: none; color: var(--text-sub); cursor: pointer;
@@ -395,11 +395,11 @@
       border-radius: 50%; font-size: 14px;
     }
     .ctrl.pp:hover { background: #e8e8e8; transform: scale(1.06); }
- 
+
     .prog-row { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 520px; }
     .time { font-size: 11px; color: var(--text-sub); width: 36px; flex-shrink: 0; }
     .time.right { text-align: right; }
- 
+
     .prog-track {
       flex: 1; height: 4px; background: var(--progress);
       border-radius: 2px; cursor: pointer; position: relative; transition: height .1s;
@@ -409,31 +409,31 @@
     .prog-track:hover .prog-bar { background: var(--green); }
     .prog-thumb { display: none; position: absolute; top: 50%; transform: translate(-50%,-50%); width: 12px; height: 12px; border-radius: 50%; background: #fff; pointer-events: none; }
     .prog-track:hover .prog-thumb { display: block; }
- 
+
     .right-controls { display: flex; align-items: center; gap: 8px; width: 220px; justify-content: flex-end; flex-shrink: 0; }
     .vol-icon { font-size: 15px; color: var(--text-sub); cursor: pointer; }
     .vol-track { width: 90px; height: 4px; background: var(--progress); border-radius: 2px; cursor: pointer; transition: height .1s; }
     .vol-track:hover { height: 6px; }
     .vol-bar { height: 100%; border-radius: 2px; background: #fff; width: 80%; pointer-events: none; }
     .vol-track:hover .vol-bar { background: var(--green); }
- 
+
     .eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
     .eq-b { width: 3px; border-radius: 1px; background: var(--green); }
     .eq-b:nth-child(1) { animation: eqA .7s ease-in-out infinite alternate; }
     .eq-b:nth-child(2) { animation: eqA .7s ease-in-out .2s infinite alternate; }
     .eq-b:nth-child(3) { animation: eqA .7s ease-in-out .4s infinite alternate; }
     @keyframes eqA { from { height: 3px; } to { height: 13px; } }
- 
+
     @keyframes spin { to { transform: rotate(360deg); } }
     .spin { animation: spin .8s linear infinite; display: inline-block; }
- 
+
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #404040; border-radius: 3px; }
   </style>
 </head>
 <body>
- 
+
 <!-- Password Modal -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
@@ -448,16 +448,16 @@
     </div>
   </div>
 </div>
- 
+
 <div class="layout">
- 
+
   <!-- Sidebar -->
   <div class="sidebar">
     <div class="logo">
       <div class="logo-icon">♪</div>
       <span class="logo-text">MusicShare</span>
     </div>
- 
+
     <nav class="nav">
       <div class="nav-item active" onclick="switchView('all',this)">
         <div class="nav-icon">⌂</div> Home
@@ -466,19 +466,19 @@
         <div class="nav-icon">⊙</div> Recent
       </div>
     </nav>
- 
+
     <div class="library-header">
       <span class="library-title">Your Library</span>
       <button class="admin-lock-btn" id="lock-btn" onclick="onLockClick()" title="Admin login">🔒</button>
     </div>
- 
+
     <div class="playlist-list" id="playlist-sidebar">
       <div style="padding:12px 10px;font-size:12px;color:var(--text-muted);">
         <span class="spin">↺</span> Loading...
       </div>
     </div>
   </div>
- 
+
   <!-- Main -->
   <div class="main">
     <div class="main-header">
@@ -497,9 +497,9 @@
         </label>
       </div>
     </div>
- 
+
     <div id="upload-toast-area"></div>
- 
+
     <div class="table-header">
       <div class="th">#</div>
       <div class="th">Title</div>
@@ -507,7 +507,7 @@
       <div class="th center" title="Download">⬇</div>
       <div class="th right">⏱</div>
     </div>
- 
+
     <div class="track-list" id="track-list">
       <div class="empty">
         <div class="empty-icon spin">↺</div>
@@ -515,9 +515,9 @@
       </div>
     </div>
   </div>
- 
+
 </div>
- 
+
 <!-- Player bar -->
 <div class="player">
   <div class="now-playing">
@@ -530,7 +530,7 @@
     <!-- Download currently playing song -->
     <a class="now-dl-btn" id="now-dl-btn" title="Download this song" style="display:none;">⬇</a>
   </div>
- 
+
   <div class="center-controls">
     <div class="ctrl-btns">
       <button class="ctrl" id="shuffle-btn" onclick="toggleShuffle()" title="Shuffle">⇄</button>
@@ -548,7 +548,7 @@
       <span class="time right" id="dur-t">0:00</span>
     </div>
   </div>
- 
+
   <div class="right-controls">
     <span class="vol-icon" id="vol-icon" onclick="toggleMute()">🔊</span>
     <div class="vol-track" onclick="setVol(event)">
@@ -556,34 +556,34 @@
     </div>
   </div>
 </div>
- 
+
 <script>
 const SUPABASE_URL = 'https://jpymdnkhckelwvjzywrl.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweW1kbmtoY2tlbHd2anp5d3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5OTk5ODEsImV4cCI6MjA5MjU3NTk4MX0.2hwKXlyotlIMZyKIps-35D0PHt_Hk0mV8TOV6132YKg';
 const BUCKET = 'music';
 const ADMIN_PASSWORD = '974449';
- 
+
 const API_HEADERS = {
   'apikey': SUPABASE_KEY,
   'Authorization': 'Bearer ' + SUPABASE_KEY,
   'Content-Type': 'application/json'
 };
- 
+
 let tracks = [], cur = -1, view = 'all', vol = 0.8;
 let shuffle = false, repeat = false, muted = false, liked = new Set();
 let isAdmin = false;
 const audio = new Audio();
 audio.volume = vol;
- 
+
 const COLORS = ['#1a3a2a','#2a1a3a','#3a2a1a','#1a2a3a','#3a1a2a','#2a3a1a','#1a1a3a'];
 const rndColor = () => COLORS[Math.floor(Math.random() * COLORS.length)];
- 
+
 function fmt(s) {
   if (!s || isNaN(s)) return '0:00';
   s = Math.floor(s);
   return Math.floor(s/60) + ':' + (s%60<10?'0':'') + (s%60);
 }
- 
+
 function timeAgo(iso) {
   if (!iso) return '';
   const diff = Math.floor((new Date() - new Date(iso)) / 1000);
@@ -593,25 +593,25 @@ function timeAgo(iso) {
   if (diff < 604800) return Math.floor(diff/86400) + ' days ago';
   return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric'});
 }
- 
+
 function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
- 
+
 function getFileUrl(path) {
   return `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${path}`;
 }
- 
+
 function setStatus(msg, state) {
   document.getElementById('status-txt').textContent = msg;
   document.getElementById('status-dot').className = 'status-dot'+(state===true?' green':state===false?' red':' yellow');
 }
- 
+
 function greet() {
   const h = new Date().getHours();
   return h<12?'Good morning':h<18?'Good afternoon':'Good evening';
 }
- 
+
 /* ── Download helper ── */
 async function downloadSong(filePath, name, e) {
   e.stopPropagation();
@@ -630,7 +630,7 @@ async function downloadSong(filePath, name, e) {
     setStatus('Download failed', false);
   }
 }
- 
+
 /* ── Admin ── */
 function updateAdminUI() {
   const lockBtn = document.getElementById('lock-btn');
@@ -654,14 +654,14 @@ function updateAdminUI() {
   }
   renderList();
 }
- 
+
 function logout() { isAdmin = false; updateAdminUI(); }
- 
+
 function onLockClick() {
   if (isAdmin) { logout(); return; }
   openModal();
 }
- 
+
 function openModal() {
   const overlay = document.getElementById('modal-overlay');
   const input = document.getElementById('pw-input');
@@ -671,11 +671,11 @@ function openModal() {
   overlay.classList.add('show');
   setTimeout(() => input.focus(), 200);
 }
- 
+
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('show');
 }
- 
+
 function submitPassword() {
   const input = document.getElementById('pw-input');
   const errEl = document.getElementById('pw-error');
@@ -693,11 +693,11 @@ function submitPassword() {
     setTimeout(() => input.classList.remove('error'), 400);
   }
 }
- 
+
 document.getElementById('modal-overlay').addEventListener('click', function(e) {
   if (e.target === this) closeModal();
 });
- 
+
 /* ── Load songs ── */
 async function loadSongs() {
   setStatus('Loading...', null);
@@ -714,19 +714,19 @@ async function loadSongs() {
     document.getElementById('track-list').innerHTML = `<div class="empty"><div style="font-size:36px;color:#e24b4a;">!</div><div class="empty-text">Connection failed</div><div class="empty-sub">${escHtml(e.message)}</div></div>`;
   }
 }
- 
+
 /* ── Render list ── */
 function renderList() {
   const list = document.getElementById('track-list');
   const shown = view === 'recent' ? tracks.slice(0,20) : tracks;
- 
+
   if (!shown.length) {
     list.innerHTML = `<div class="empty"><div class="empty-icon">🎵</div><div class="empty-text">No songs yet</div><div class="empty-sub">${isAdmin?'Click ↑ Upload to add songs':'No songs uploaded yet'}</div></div>`;
     return;
   }
- 
+
   const eq = `<div class="eq"><div class="eq-b" style="height:4px;"></div><div class="eq-b" style="height:9px;"></div><div class="eq-b" style="height:6px;"></div></div>`;
- 
+
   list.innerHTML = shown.map((t, i) => {
     const ri = tracks.indexOf(t);
     const ip = cur === ri;
@@ -734,7 +734,7 @@ function renderList() {
     const delBtn = isAdmin
       ? `<button class="del-btn admin-visible" onclick="deleteSong('${t.id}','${t.file_path}',event)" title="Remove">✕</button>`
       : '';
- 
+
     return `<div class="track-row${ip?' playing':''}" onclick="playTrack(${ri})">
       <div class="track-num">
         ${ip ? eq : `<span class="t-num">${i+1}</span><span class="p-icon">▶</span>`}
@@ -754,7 +754,7 @@ function renderList() {
     </div>`;
   }).join('');
 }
- 
+
 /* ── Render sidebar ── */
 function renderSidebar() {
   const sb = document.getElementById('playlist-sidebar');
@@ -768,7 +768,7 @@ function renderSidebar() {
       </div>
     </div>`).join('');
 }
- 
+
 /* ── Playback ── */
 async function playTrack(i) {
   cur = i;
@@ -789,31 +789,31 @@ async function playTrack(i) {
   renderList();
   renderSidebar();
 }
- 
+
 function togglePlay() {
   if (cur<0 && tracks.length>0) { playTrack(0); return; }
   if (cur<0) return;
   if (audio.paused) { audio.play(); document.getElementById('pp-btn').textContent='⏸'; }
   else { audio.pause(); document.getElementById('pp-btn').textContent='▶'; renderList(); }
 }
- 
+
 function next() {
   if (!tracks.length) return;
   playTrack(shuffle ? Math.floor(Math.random()*tracks.length) : (cur+1)%tracks.length);
 }
- 
+
 function prev() {
   if (!tracks.length) return;
   if (audio.currentTime>3) { audio.currentTime=0; return; }
   playTrack((cur-1+tracks.length)%tracks.length);
 }
- 
+
 function seek(e) {
   if (!audio.duration) return;
   const r = e.currentTarget.getBoundingClientRect();
   audio.currentTime = ((e.clientX-r.left)/r.width)*audio.duration;
 }
- 
+
 function setVol(e) {
   const r = e.currentTarget.getBoundingClientRect();
   vol = Math.min(1, Math.max(0, (e.clientX-r.left)/r.width));
@@ -821,19 +821,19 @@ function setVol(e) {
   document.getElementById('vol-bar').style.width = (vol*100)+'%';
   document.getElementById('vol-icon').textContent = vol<.3?'🔈':vol<.7?'🔉':'🔊';
 }
- 
+
 function toggleMute() {
   muted = !muted;
   audio.volume = muted?0:vol;
   document.getElementById('vol-icon').textContent = muted?'🔇':vol<.3?'🔈':'🔊';
   document.getElementById('vol-bar').style.width = muted?'0%':(vol*100)+'%';
 }
- 
+
 function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffle-btn').classList.toggle('active',shuffle); }
 function toggleRepeat() { repeat=!repeat; audio.loop=repeat; document.getElementById('repeat-btn').classList.toggle('active',repeat); }
 function toggleLike() { if(cur<0)return; if(liked.has(cur))liked.delete(cur); else liked.add(cur); updateHeartBtn(); }
 function updateHeartBtn() { const b=document.getElementById('heart-btn'); b.textContent=liked.has(cur)?'♥':'♡'; b.classList.toggle('liked',liked.has(cur)); }
- 
+
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration) return;
   const p = (audio.currentTime/audio.duration)*100;
@@ -842,18 +842,18 @@ audio.addEventListener('timeupdate', () => {
   document.getElementById('cur-t').textContent = fmt(audio.currentTime);
   document.getElementById('dur-t').textContent = fmt(audio.duration);
 });
- 
+
 audio.addEventListener('ended', () => { document.getElementById('pp-btn').textContent='▶'; if(!repeat)next(); });
- 
+
 /* ── Upload (admin only) ── */
 async function handleUpload(files) {
   if (!isAdmin) return;
   const arr = Array.from(files).filter(f => f.type.startsWith('audio/'));
   if (!arr.length) return;
- 
+
   const area = document.getElementById('upload-toast-area');
   area.innerHTML = `<div class="upload-toast"><span style="font-size:12px;color:var(--text-sub);white-space:nowrap;">Uploading ${arr.length} file${arr.length>1?'s':''}...</span><div class="up-bar"><div class="up-fill" id="up-fill"></div></div><span id="up-count" style="font-size:12px;color:var(--text-sub);white-space:nowrap;">0/${arr.length}</span></div>`;
- 
+
   let done = 0;
   for (const f of arr) {
     const safe = Date.now()+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
@@ -876,13 +876,13 @@ async function handleUpload(files) {
       document.getElementById('up-count').textContent = done+'/'+arr.length;
     } catch(e) { setStatus('Upload failed: '+e.message, false); }
   }
- 
+
   setTimeout(()=>{ area.innerHTML=''; }, 2000);
   setStatus('Uploaded '+done+' song'+(done!==1?'s':''), true);
   document.getElementById('file-in').value = '';
   await loadSongs();
 }
- 
+
 /* ── Delete (admin only) ── */
 async function deleteSong(id, filePath, e) {
   e.stopPropagation();
@@ -900,7 +900,7 @@ async function deleteSong(id, filePath, e) {
   await fetch(`${SUPABASE_URL}/rest/v1/songs?id=eq.${id}`,{method:'DELETE',headers:API_HEADERS});
   await loadSongs();
 }
- 
+
 /* ── View switch ── */
 function switchView(v, el) {
   view = v;
@@ -909,10 +909,10 @@ function switchView(v, el) {
   document.getElementById('view-title').textContent = v==='recent'?'Recently added':greet();
   renderList();
 }
- 
+
 document.addEventListener('dragover', e=>e.preventDefault());
 document.addEventListener('drop', e=>{ e.preventDefault(); if(isAdmin) handleUpload(e.dataTransfer.files); });
- 
+
 document.getElementById('view-title').textContent = greet();
 loadSongs();
 setInterval(loadSongs, 30000);
