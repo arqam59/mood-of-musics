@@ -17,7 +17,6 @@
       --text: #FFFFFF;
       --text-sub: #b3b3b3;
       --text-muted: #6a6a6a;
-      --player-bg: #181818;
       --progress: #535353;
     }
 
@@ -53,24 +52,61 @@
       overflow: hidden;
     }
 
+    /* Logo area — lock button lives here as green circle */
     .logo {
-      padding: 20px 20px 8px;
+      padding: 18px 20px 10px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .logo-icon {
-      width: 36px; height: 36px;
-      background: var(--green);
+    /* 🔒 Lock = green circle logo button */
+    .logo-lock-btn {
+      width: 38px; height: 38px;
       border-radius: 50%;
+      background: var(--green);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      flex-shrink: 0;
+      transition: background .15s, transform .15s, box-shadow .15s;
+      box-shadow: 0 2px 8px rgba(29,185,84,.35);
+      position: relative;
+    }
+    .logo-lock-btn:hover {
+      background: var(--green-hover);
+      transform: scale(1.06);
+      box-shadow: 0 4px 14px rgba(29,185,84,.5);
+    }
+    .logo-lock-btn.unlocked {
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(29,185,84,.35);
     }
 
-    .logo-text { font-size: 18px; font-weight: 700; letter-spacing: -.5px; }
+    /* Tooltip on hover */
+    .logo-lock-btn::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 46px; top: 50%;
+      transform: translateY(-50%);
+      background: #333;
+      color: #fff;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 5px;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .15s;
+    }
+    .logo-lock-btn:hover::after { opacity: 1; }
 
-    .nav { padding: 12px 8px; }
+    .logo-text-wrap { min-width: 0; }
+    .logo-text { font-size: 17px; font-weight: 700; letter-spacing: -.4px; color: var(--text); }
+    .logo-sub { font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+
+    .nav { padding: 10px 8px; }
 
     .nav-item {
       display: flex; align-items: center; gap: 14px;
@@ -93,16 +129,6 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .library-title { font-size: 13px; font-weight: 600; color: var(--text-sub); letter-spacing: .03em; }
-
-    .admin-lock-btn {
-      width: 28px; height: 28px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: 50%; color: var(--text-muted); cursor: pointer;
-      font-size: 15px; transition: color .15s, background .15s;
-      border: none; background: none;
-    }
-    .admin-lock-btn:hover { color: var(--text); background: var(--card); }
-    .admin-lock-btn.unlocked { color: var(--green); }
 
     .playlist-list { flex: 1; overflow-y: auto; padding: 4px 8px 12px; }
     .playlist-list::-webkit-scrollbar { width: 4px; }
@@ -139,7 +165,7 @@
     }
 
     .main-title { font-size: 22px; font-weight: 700; }
-    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 
     .status-pill {
       display: flex; align-items: center; gap: 6px;
@@ -180,7 +206,7 @@
     }
     .logout-btn:hover { background: rgba(29,185,84,.1); }
 
-    /* Table header — now with download column */
+    /* Table header */
     .table-header {
       display: grid;
       grid-template-columns: 48px 1fr 110px 36px 60px;
@@ -231,16 +257,13 @@
     .track-artist { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
     .track-date { font-size: 12px; color: var(--text-sub); }
 
-    /* Download button — always visible to everyone */
     .dl-btn {
       width: 30px; height: 30px;
       display: flex; align-items: center; justify-content: center;
       border-radius: 50%; color: var(--text-muted);
       cursor: pointer; border: none; background: none;
-      font-size: 15px;
-      opacity: 0;
+      font-size: 15px; opacity: 0;
       transition: opacity .15s, color .15s, background .15s;
-      text-decoration: none;
     }
     .track-row:hover .dl-btn { opacity: 1; }
     .dl-btn:hover { color: var(--green); background: rgba(29,185,84,.1); }
@@ -248,7 +271,8 @@
     .track-actions { display: flex; align-items: center; justify-content: flex-end; gap: 4px; }
 
     .del-btn {
-      width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
       border-radius: 50%; color: var(--text-sub); cursor: pointer;
       opacity: 0; transition: opacity .1s, background .1s;
       border: none; background: none; font-size: 12px;
@@ -275,45 +299,49 @@
     /* ── Password Modal ── */
     .modal-overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,.75);
+      background: rgba(0,0,0,.78);
       display: flex; align-items: center; justify-content: center;
       z-index: 1000;
-      backdrop-filter: blur(6px);
+      backdrop-filter: blur(8px);
       opacity: 0; pointer-events: none;
       transition: opacity .2s;
     }
     .modal-overlay.show { opacity: 1; pointer-events: all; }
 
     .modal {
-      background: #282828;
-      border-radius: 14px;
-      padding: 36px 32px 28px;
-      width: 360px;
-      display: flex; flex-direction: column; align-items: center; gap: 20px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.6);
-      transform: scale(.95);
-      transition: transform .2s;
+      background: #1e1e1e;
+      border: 1px solid #383838;
+      border-radius: 16px;
+      padding: 38px 32px 30px;
+      width: 370px;
+      display: flex; flex-direction: column; align-items: center; gap: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.7);
+      transform: scale(.94) translateY(10px);
+      transition: transform .22s;
     }
-    .modal-overlay.show .modal { transform: scale(1); }
+    .modal-overlay.show .modal { transform: scale(1) translateY(0); }
 
-    .modal-icon {
-      width: 56px; height: 56px; border-radius: 50%;
-      background: rgba(29,185,84,.15); border: 2px solid rgba(29,185,84,.3);
-      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    /* Green circle in modal mirrors the logo lock button */
+    .modal-logo {
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 4px 18px rgba(29,185,84,.45);
     }
 
     .modal-title { font-size: 20px; font-weight: 700; color: var(--text); text-align: center; }
-    .modal-sub { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: -10px; }
+    .modal-sub { font-size: 13px; color: var(--text-sub); text-align: center; margin-top: -8px; line-height: 1.5; }
 
     .pw-input {
       width: 100%;
-      background: #3e3e3e;
-      border: 1.5px solid #535353;
-      border-radius: 8px;
-      padding: 12px 16px;
-      font-size: 20px;
+      background: #2a2a2a;
+      border: 1.5px solid #444;
+      border-radius: 10px;
+      padding: 13px 18px;
+      font-size: 22px;
       color: var(--text);
-      letter-spacing: 6px;
+      letter-spacing: 8px;
       text-align: center;
       font-family: inherit;
       outline: none;
@@ -333,15 +361,15 @@
     .modal-actions { display: flex; gap: 10px; width: 100%; }
 
     .modal-btn {
-      flex: 1; padding: 12px; border-radius: 500px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
+      flex: 1; padding: 13px; border-radius: 500px;
+      font-size: 14px; font-weight: 700; cursor: pointer;
       border: none; font-family: inherit; transition: background .15s, transform .1s;
     }
     .modal-btn:active { transform: scale(.97); }
     .modal-btn.confirm { background: var(--green); color: #000; }
     .modal-btn.confirm:hover { background: var(--green-hover); }
-    .modal-btn.cancel { background: var(--card-hover); color: var(--text); }
-    .modal-btn.cancel:hover { background: #555; }
+    .modal-btn.cancel { background: #383838; color: var(--text); }
+    .modal-btn.cancel:hover { background: #484848; }
 
     /* ── Player bar ── */
     .player {
@@ -366,11 +394,10 @@
     .now-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .now-artist { font-size: 11px; color: var(--text-sub); margin-top: 2px; }
 
-    /* Download now-playing button */
     .now-dl-btn {
       font-size: 16px; color: var(--text-sub); cursor: pointer;
       flex-shrink: 0; transition: color .15s; background: none; border: none;
-      text-decoration: none; display: flex; align-items: center;
+      text-decoration: none; display: none; align-items: center;
     }
     .now-dl-btn:hover { color: var(--green); }
 
@@ -437,10 +464,11 @@
 <!-- Password Modal -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
-    <div class="modal-icon">🔒</div>
+    <div class="modal-logo">🔒</div>
     <div class="modal-title">Admin Access</div>
-    <div class="modal-sub">Enter the admin password to manage songs</div>
-    <input class="pw-input" type="password" id="pw-input" maxlength="20" placeholder="••••••" onkeydown="if(event.key==='Enter')submitPassword()"/>
+    <div class="modal-sub">Enter the admin password to<br>upload or delete songs</div>
+    <input class="pw-input" type="password" id="pw-input" maxlength="20" placeholder="••••••"
+      onkeydown="if(event.key==='Enter')submitPassword()"/>
     <div class="pw-error" id="pw-error"></div>
     <div class="modal-actions">
       <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
@@ -453,9 +481,15 @@
 
   <!-- Sidebar -->
   <div class="sidebar">
+
+    <!-- Logo area: green circle = lock/unlock button -->
     <div class="logo">
-      <div class="logo-icon">♪</div>
-      <span class="logo-text">MusicShare</span>
+      <button class="logo-lock-btn" id="lock-btn" onclick="onLockClick()"
+        data-tip="Admin login">🔒</button>
+      <div class="logo-text-wrap">
+        <div class="logo-text">MusicShare</div>
+        <div class="logo-sub" id="logo-sub">shared library</div>
+      </div>
     </div>
 
     <nav class="nav">
@@ -469,7 +503,6 @@
 
     <div class="library-header">
       <span class="library-title">Your Library</span>
-      <button class="admin-lock-btn" id="lock-btn" onclick="onLockClick()" title="Admin login">🔒</button>
     </div>
 
     <div class="playlist-list" id="playlist-sidebar">
@@ -493,7 +526,8 @@
         <button class="btn btn-outline" onclick="loadSongs()">↺ Refresh</button>
         <label class="btn btn-green" id="upload-btn" for="file-in" style="display:none;cursor:pointer;">
           ↑ Upload
-          <input type="file" id="file-in" accept="audio/*" multiple style="display:none;" onchange="handleUpload(this.files)">
+          <input type="file" id="file-in" accept="audio/*" multiple style="display:none;"
+            onchange="handleUpload(this.files)">
         </label>
       </div>
     </div>
@@ -527,8 +561,7 @@
       <div class="now-artist" id="now-artist">Select a song</div>
     </div>
     <button class="heart-btn" id="heart-btn" onclick="toggleLike()">♡</button>
-    <!-- Download currently playing song -->
-    <a class="now-dl-btn" id="now-dl-btn" title="Download this song" style="display:none;">⬇</a>
+    <a class="now-dl-btn" id="now-dl-btn" title="Download">⬇</a>
   </div>
 
   <div class="center-controls">
@@ -558,17 +591,19 @@
 </div>
 
 <script>
-const SUPABASE_URL = 'https://jpymdnkhckelwvjzywrl.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweW1kbmtoY2tlbHd2anp5d3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5OTk5ODEsImV4cCI6MjA5MjU3NTk4MX0.2hwKXlyotlIMZyKIps-35D0PHt_Hk0mV8TOV6132YKg';
-const BUCKET = 'music';
-const ADMIN_PASSWORD = '974449';
+/* ── Config ── */
+const SUPABASE_URL  = 'https://jpymdnkhckelwvjzywrl.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweW1kbmtoY2tlbHd2anp5d3JsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY5OTk5ODEsImV4cCI6MjA5MjU3NTk4MX0.2hwKXlyotlIMZyKIps-35D0PHt_Hk0mV8TOV6132YKg';
+const BUCKET        = 'music';
+const ADMIN_PASS    = '974449';
 
 const API_HEADERS = {
-  'apikey': SUPABASE_KEY,
+  'apikey'       : SUPABASE_KEY,
   'Authorization': 'Bearer ' + SUPABASE_KEY,
-  'Content-Type': 'application/json'
+  'Content-Type' : 'application/json'
 };
 
+/* ── State ── */
 let tracks = [], cur = -1, view = 'all', vol = 0.8;
 let shuffle = false, repeat = false, muted = false, liked = new Set();
 let isAdmin = false;
@@ -578,24 +613,54 @@ audio.volume = vol;
 const COLORS = ['#1a3a2a','#2a1a3a','#3a2a1a','#1a2a3a','#3a1a2a','#2a3a1a','#1a1a3a'];
 const rndColor = () => COLORS[Math.floor(Math.random() * COLORS.length)];
 
+/* ── Mojibake fix ── */
+/* Converts garbled Latin-1/Windows-1252 → proper UTF-8 text */
+function fixEncoding(str) {
+  if (!str) return '';
+  try {
+    // Attempt to decode bytes that were mis-read as Latin-1
+    const bytes = new Uint8Array([...str].map(c => c.charCodeAt(0) & 0xff));
+    const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+    // If decoded looks more valid (has fewer replacement chars), use it
+    const replacements = (decoded.match(/\uFFFD/g) || []).length;
+    const origReplacements = (str.match(/[ÿþ\x80-\x9f]/g) || []).length;
+    return origReplacements > replacements ? decoded : str;
+  } catch {
+    return str;
+  }
+}
+
+/* Clean a display name: fix encoding, trim whitespace */
+function cleanName(raw) {
+  if (!raw) return '';
+  let s = fixEncoding(raw.trim());
+  // Remove leading/trailing quotes or underscores artifacts
+  s = s.replace(/^["'_]+|["'_]+$/g, '').trim();
+  return s || raw;
+}
+
 function fmt(s) {
   if (!s || isNaN(s)) return '0:00';
   s = Math.floor(s);
-  return Math.floor(s/60) + ':' + (s%60<10?'0':'') + (s%60);
+  return Math.floor(s / 60) + ':' + (s % 60 < 10 ? '0' : '') + (s % 60);
 }
 
 function timeAgo(iso) {
   if (!iso) return '';
   const diff = Math.floor((new Date() - new Date(iso)) / 1000);
   if (diff < 60) return 'Just now';
-  if (diff < 3600) return Math.floor(diff/60) + ' min ago';
-  if (diff < 86400) return Math.floor(diff/3600) + ' hr ago';
-  if (diff < 604800) return Math.floor(diff/86400) + ' days ago';
-  return new Date(iso).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  if (diff < 3600) return Math.floor(diff / 60) + ' min ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + ' hr ago';
+  if (diff < 604800) return Math.floor(diff / 86400) + ' days ago';
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
 
 function escHtml(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
 function getFileUrl(path) {
@@ -604,53 +669,41 @@ function getFileUrl(path) {
 
 function setStatus(msg, state) {
   document.getElementById('status-txt').textContent = msg;
-  document.getElementById('status-dot').className = 'status-dot'+(state===true?' green':state===false?' red':' yellow');
+  document.getElementById('status-dot').className =
+    'status-dot' + (state === true ? ' green' : state === false ? ' red' : ' yellow');
 }
 
 function greet() {
   const h = new Date().getHours();
-  return h<12?'Good morning':h<18?'Good afternoon':'Good evening';
+  return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
 }
 
-/* ── Download helper ── */
-async function downloadSong(filePath, name, e) {
-  e.stopPropagation();
-  e.preventDefault();
-  try {
-    const url = getFileUrl(filePath);
-    const res = await fetch(url);
-    const blob = await res.blob();
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = name + '.mp3';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 1000);
-  } catch(err) {
-    setStatus('Download failed', false);
-  }
-}
-
-/* ── Admin ── */
+/* ── Admin UI ── */
 function updateAdminUI() {
-  const lockBtn = document.getElementById('lock-btn');
+  const lockBtn   = document.getElementById('lock-btn');
   const adminBadge = document.getElementById('admin-badge');
   const logoutBtn = document.getElementById('logout-btn');
   const uploadBtn = document.getElementById('upload-btn');
+  const logoSub   = document.getElementById('logo-sub');
+
   if (isAdmin) {
     lockBtn.textContent = '🔓';
     lockBtn.classList.add('unlocked');
-    lockBtn.title = 'Admin mode active';
+    lockBtn.setAttribute('data-tip', 'Click to lock admin');
     adminBadge.style.display = 'flex';
-    logoutBtn.style.display = 'inline-flex';
-    uploadBtn.style.display = 'flex';
+    logoutBtn.style.display  = 'inline-flex';
+    uploadBtn.style.display  = 'flex';
+    logoSub.textContent      = '🛡 Admin mode';
+    logoSub.style.color      = 'var(--green)';
   } else {
     lockBtn.textContent = '🔒';
     lockBtn.classList.remove('unlocked');
-    lockBtn.title = 'Admin login';
+    lockBtn.setAttribute('data-tip', 'Admin login');
     adminBadge.style.display = 'none';
-    logoutBtn.style.display = 'none';
-    uploadBtn.style.display = 'none';
+    logoutBtn.style.display  = 'none';
+    uploadBtn.style.display  = 'none';
+    logoSub.textContent      = 'shared library';
+    logoSub.style.color      = '';
   }
   renderList();
 }
@@ -662,13 +715,13 @@ function onLockClick() {
   openModal();
 }
 
+/* ── Modal ── */
 function openModal() {
-  const overlay = document.getElementById('modal-overlay');
   const input = document.getElementById('pw-input');
   document.getElementById('pw-error').textContent = '';
   input.value = '';
   input.classList.remove('error');
-  overlay.classList.add('show');
+  document.getElementById('modal-overlay').classList.add('show');
   setTimeout(() => input.focus(), 200);
 }
 
@@ -679,14 +732,14 @@ function closeModal() {
 function submitPassword() {
   const input = document.getElementById('pw-input');
   const errEl = document.getElementById('pw-error');
-  if (input.value === ADMIN_PASSWORD) {
+  if (input.value === ADMIN_PASS) {
     isAdmin = true;
     closeModal();
     updateAdminUI();
     setStatus('Admin mode active', true);
   } else {
     input.classList.remove('error');
-    void input.offsetWidth;
+    void input.offsetWidth; // restart animation
     input.classList.add('error');
     errEl.textContent = 'Incorrect password. Try again.';
     input.value = '';
@@ -694,7 +747,7 @@ function submitPassword() {
   }
 }
 
-document.getElementById('modal-overlay').addEventListener('click', function(e) {
+document.getElementById('modal-overlay').addEventListener('click', function (e) {
   if (e.target === this) closeModal();
 });
 
@@ -702,69 +755,103 @@ document.getElementById('modal-overlay').addEventListener('click', function(e) {
 async function loadSongs() {
   setStatus('Loading...', null);
   try {
-    const res = await fetch(`${SUPABASE_URL}/rest/v1/songs?select=*&order=created_at.desc`, { headers: API_HEADERS });
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/songs?select=*&order=created_at.desc`,
+      { headers: API_HEADERS }
+    );
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    tracks = data.map(s => ({ ...s, color: rndColor(), url: null }));
+    tracks = data.map(s => ({
+      ...s,
+      // Fix Mojibake on load
+      name  : cleanName(s.name),
+      artist: cleanName(s.artist),
+      color : rndColor(),
+      url   : null
+    }));
     setStatus(tracks.length + ' songs', true);
     renderList();
     renderSidebar();
-  } catch(e) {
+  } catch (e) {
     setStatus('Error: ' + e.message, false);
-    document.getElementById('track-list').innerHTML = `<div class="empty"><div style="font-size:36px;color:#e24b4a;">!</div><div class="empty-text">Connection failed</div><div class="empty-sub">${escHtml(e.message)}</div></div>`;
+    document.getElementById('track-list').innerHTML =
+      `<div class="empty">
+        <div style="font-size:36px;color:#e24b4a;">!</div>
+        <div class="empty-text">Connection failed</div>
+        <div class="empty-sub">${escHtml(e.message)}</div>
+      </div>`;
   }
 }
 
-/* ── Render list ── */
+/* ── Render track list ── */
 function renderList() {
-  const list = document.getElementById('track-list');
-  const shown = view === 'recent' ? tracks.slice(0,20) : tracks;
+  const list  = document.getElementById('track-list');
+  const shown = view === 'recent' ? tracks.slice(0, 20) : tracks;
 
   if (!shown.length) {
-    list.innerHTML = `<div class="empty"><div class="empty-icon">🎵</div><div class="empty-text">No songs yet</div><div class="empty-sub">${isAdmin?'Click ↑ Upload to add songs':'No songs uploaded yet'}</div></div>`;
+    list.innerHTML =
+      `<div class="empty">
+        <div class="empty-icon">🎵</div>
+        <div class="empty-text">No songs yet</div>
+        <div class="empty-sub">${isAdmin ? 'Click ↑ Upload to add songs' : 'No songs uploaded yet'}</div>
+      </div>`;
     return;
   }
 
-  const eq = `<div class="eq"><div class="eq-b" style="height:4px;"></div><div class="eq-b" style="height:9px;"></div><div class="eq-b" style="height:6px;"></div></div>`;
+  const eq = `<div class="eq">
+    <div class="eq-b" style="height:4px;"></div>
+    <div class="eq-b" style="height:9px;"></div>
+    <div class="eq-b" style="height:6px;"></div>
+  </div>`;
 
   list.innerHTML = shown.map((t, i) => {
-    const ri = tracks.indexOf(t);
-    const ip = cur === ri;
-    const fileUrl = getFileUrl(t.file_path);
+    const ri  = tracks.indexOf(t);
+    const ip  = cur === ri;
     const delBtn = isAdmin
-      ? `<button class="del-btn admin-visible" onclick="deleteSong('${t.id}','${t.file_path}',event)" title="Remove">✕</button>`
+      ? `<button class="del-btn admin-visible"
+           onclick="deleteSong('${t.id}','${t.file_path}',event)"
+           title="Remove">✕</button>`
       : '';
 
-    return `<div class="track-row${ip?' playing':''}" onclick="playTrack(${ri})">
-      <div class="track-num">
-        ${ip ? eq : `<span class="t-num">${i+1}</span><span class="p-icon">▶</span>`}
-      </div>
-      <div class="track-cell">
-        <div class="track-art" style="background:${t.color};">🎵</div>
-        <div class="track-info">
-          <div class="track-name${ip?' playing':''}">${escHtml(t.name)}</div>
-          <div class="track-artist">${escHtml(t.artist||'Unknown artist')}</div>
+    return `
+      <div class="track-row${ip ? ' playing' : ''}" onclick="playTrack(${ri})">
+        <div class="track-num">
+          ${ip
+            ? eq
+            : `<span class="t-num">${i + 1}</span><span class="p-icon">▶</span>`
+          }
         </div>
-      </div>
-      <div class="track-date">${timeAgo(t.created_at)}</div>
-      <div style="display:flex;align-items:center;justify-content:center;">
-        <button class="dl-btn" onclick="downloadSong('${t.file_path}','${escHtml(t.name)}',event)" title="Download">⬇</button>
-      </div>
-      <div class="track-actions">${delBtn}</div>
-    </div>`;
+        <div class="track-cell">
+          <div class="track-art" style="background:${t.color};">🎵</div>
+          <div class="track-info">
+            <div class="track-name${ip ? ' playing' : ''}">${escHtml(t.name)}</div>
+            <div class="track-artist">${escHtml(t.artist)}</div>
+          </div>
+        </div>
+        <div class="track-date">${timeAgo(t.created_at)}</div>
+        <div style="display:flex;align-items:center;justify-content:center;">
+          <button class="dl-btn"
+            onclick="downloadSong('${t.file_path}','${escHtml(t.name)}',event)"
+            title="Download">⬇</button>
+        </div>
+        <div class="track-actions">${delBtn}</div>
+      </div>`;
   }).join('');
 }
 
 /* ── Render sidebar ── */
 function renderSidebar() {
   const sb = document.getElementById('playlist-sidebar');
-  if (!tracks.length) { sb.innerHTML = '<div style="padding:10px;font-size:12px;color:var(--text-muted);">No songs yet</div>'; return; }
-  sb.innerHTML = tracks.slice(0,15).map((t,i) => `
-    <div class="playlist-row${cur===i?' active':''}" onclick="playTrack(${i})">
+  if (!tracks.length) {
+    sb.innerHTML = '<div style="padding:10px;font-size:12px;color:var(--text-muted);">No songs yet</div>';
+    return;
+  }
+  sb.innerHTML = tracks.slice(0, 15).map((t, i) => `
+    <div class="playlist-row${cur === i ? ' active' : ''}" onclick="playTrack(${i})">
       <div class="playlist-art" style="background:${t.color};">🎵</div>
       <div class="playlist-info">
         <div class="playlist-name">${escHtml(t.name)}</div>
-        <div class="playlist-meta">Song · ${escHtml(t.artist||'Unknown')}</div>
+        <div class="playlist-meta">Song · ${escHtml(t.artist)}</div>
       </div>
     </div>`).join('');
 }
@@ -776,12 +863,15 @@ async function playTrack(i) {
   if (!t.url) t.url = getFileUrl(t.file_path);
   audio.src = t.url;
   audio.volume = muted ? 0 : vol;
-  try { await audio.play(); document.getElementById('pp-btn').textContent = '⏸'; }
-  catch(e) { setStatus('Playback error', false); }
-  document.getElementById('now-name').textContent = t.name;
-  document.getElementById('now-artist').textContent = t.artist || 'Unknown artist';
+  try {
+    await audio.play();
+    document.getElementById('pp-btn').textContent = '⏸';
+  } catch (e) {
+    setStatus('Playback error', false);
+  }
+  document.getElementById('now-name').textContent   = t.name;
+  document.getElementById('now-artist').textContent = t.artist;
   document.getElementById('now-art').style.background = t.color;
-  // Update download button in player bar
   const nowDl = document.getElementById('now-dl-btn');
   nowDl.style.display = 'flex';
   nowDl.onclick = (e) => downloadSong(t.file_path, t.name, e);
@@ -791,59 +881,89 @@ async function playTrack(i) {
 }
 
 function togglePlay() {
-  if (cur<0 && tracks.length>0) { playTrack(0); return; }
-  if (cur<0) return;
-  if (audio.paused) { audio.play(); document.getElementById('pp-btn').textContent='⏸'; }
-  else { audio.pause(); document.getElementById('pp-btn').textContent='▶'; renderList(); }
+  if (cur < 0 && tracks.length > 0) { playTrack(0); return; }
+  if (cur < 0) return;
+  if (audio.paused) { audio.play(); document.getElementById('pp-btn').textContent = '⏸'; }
+  else              { audio.pause(); document.getElementById('pp-btn').textContent = '▶'; renderList(); }
 }
 
 function next() {
   if (!tracks.length) return;
-  playTrack(shuffle ? Math.floor(Math.random()*tracks.length) : (cur+1)%tracks.length);
+  playTrack(shuffle
+    ? Math.floor(Math.random() * tracks.length)
+    : (cur + 1) % tracks.length);
 }
 
 function prev() {
   if (!tracks.length) return;
-  if (audio.currentTime>3) { audio.currentTime=0; return; }
-  playTrack((cur-1+tracks.length)%tracks.length);
+  if (audio.currentTime > 3) { audio.currentTime = 0; return; }
+  playTrack((cur - 1 + tracks.length) % tracks.length);
 }
 
 function seek(e) {
   if (!audio.duration) return;
   const r = e.currentTarget.getBoundingClientRect();
-  audio.currentTime = ((e.clientX-r.left)/r.width)*audio.duration;
+  audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
 }
 
 function setVol(e) {
   const r = e.currentTarget.getBoundingClientRect();
-  vol = Math.min(1, Math.max(0, (e.clientX-r.left)/r.width));
-  audio.volume = vol; muted = false;
-  document.getElementById('vol-bar').style.width = (vol*100)+'%';
-  document.getElementById('vol-icon').textContent = vol<.3?'🔈':vol<.7?'🔉':'🔊';
+  vol = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+  audio.volume = vol;
+  muted = false;
+  document.getElementById('vol-bar').style.width = (vol * 100) + '%';
+  document.getElementById('vol-icon').textContent = vol < .3 ? '🔈' : vol < .7 ? '🔉' : '🔊';
 }
 
 function toggleMute() {
   muted = !muted;
-  audio.volume = muted?0:vol;
-  document.getElementById('vol-icon').textContent = muted?'🔇':vol<.3?'🔈':'🔊';
-  document.getElementById('vol-bar').style.width = muted?'0%':(vol*100)+'%';
+  audio.volume = muted ? 0 : vol;
+  document.getElementById('vol-icon').textContent = muted ? '🔇' : vol < .3 ? '🔈' : '🔊';
+  document.getElementById('vol-bar').style.width = muted ? '0%' : (vol * 100) + '%';
 }
 
-function toggleShuffle() { shuffle=!shuffle; document.getElementById('shuffle-btn').classList.toggle('active',shuffle); }
-function toggleRepeat() { repeat=!repeat; audio.loop=repeat; document.getElementById('repeat-btn').classList.toggle('active',repeat); }
-function toggleLike() { if(cur<0)return; if(liked.has(cur))liked.delete(cur); else liked.add(cur); updateHeartBtn(); }
-function updateHeartBtn() { const b=document.getElementById('heart-btn'); b.textContent=liked.has(cur)?'♥':'♡'; b.classList.toggle('liked',liked.has(cur)); }
+function toggleShuffle() { shuffle = !shuffle; document.getElementById('shuffle-btn').classList.toggle('active', shuffle); }
+function toggleRepeat()  { repeat  = !repeat;  audio.loop = repeat; document.getElementById('repeat-btn').classList.toggle('active', repeat); }
+function toggleLike()    { if (cur < 0) return; if (liked.has(cur)) liked.delete(cur); else liked.add(cur); updateHeartBtn(); }
+function updateHeartBtn() {
+  const b = document.getElementById('heart-btn');
+  b.textContent = liked.has(cur) ? '♥' : '♡';
+  b.classList.toggle('liked', liked.has(cur));
+}
 
 audio.addEventListener('timeupdate', () => {
   if (!audio.duration) return;
-  const p = (audio.currentTime/audio.duration)*100;
-  document.getElementById('prog-bar').style.width = p+'%';
-  document.getElementById('prog-thumb').style.left = p+'%';
+  const p = (audio.currentTime / audio.duration) * 100;
+  document.getElementById('prog-bar').style.width  = p + '%';
+  document.getElementById('prog-thumb').style.left = p + '%';
   document.getElementById('cur-t').textContent = fmt(audio.currentTime);
   document.getElementById('dur-t').textContent = fmt(audio.duration);
 });
 
-audio.addEventListener('ended', () => { document.getElementById('pp-btn').textContent='▶'; if(!repeat)next(); });
+audio.addEventListener('ended', () => {
+  document.getElementById('pp-btn').textContent = '▶';
+  if (!repeat) next();
+});
+
+/* ── Download ── */
+async function downloadSong(filePath, name, e) {
+  e.stopPropagation();
+  e.preventDefault();
+  try {
+    const res  = await fetch(getFileUrl(filePath));
+    const blob = await res.blob();
+    const a    = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    // Use clean name for filename
+    const ext  = filePath.split('.').pop() || 'mp3';
+    a.download = cleanName(name) + '.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); document.body.removeChild(a); }, 1000);
+  } catch (err) {
+    setStatus('Download failed', false);
+  }
+}
 
 /* ── Upload (admin only) ── */
 async function handleUpload(files) {
@@ -852,33 +972,54 @@ async function handleUpload(files) {
   if (!arr.length) return;
 
   const area = document.getElementById('upload-toast-area');
-  area.innerHTML = `<div class="upload-toast"><span style="font-size:12px;color:var(--text-sub);white-space:nowrap;">Uploading ${arr.length} file${arr.length>1?'s':''}...</span><div class="up-bar"><div class="up-fill" id="up-fill"></div></div><span id="up-count" style="font-size:12px;color:var(--text-sub);white-space:nowrap;">0/${arr.length}</span></div>`;
+  area.innerHTML =
+    `<div class="upload-toast">
+      <span style="font-size:12px;color:var(--text-sub);white-space:nowrap;">
+        Uploading ${arr.length} file${arr.length > 1 ? 's' : ''}...
+      </span>
+      <div class="up-bar"><div class="up-fill" id="up-fill"></div></div>
+      <span id="up-count" style="font-size:12px;color:var(--text-sub);white-space:nowrap;">0/${arr.length}</span>
+    </div>`;
 
   let done = 0;
   for (const f of arr) {
-    const safe = Date.now()+'_'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    // Keep filename UTF-8 safe
+    const safe = Date.now() + '_' + f.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
     try {
       const up = await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${safe}`, {
-        method:'POST',
-        headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':f.type,'x-upsert':'true'},
-        body:f
+        method : 'POST',
+        headers: {
+          'apikey'       : SUPABASE_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_KEY,
+          'Content-Type' : f.type,
+          'x-upsert'     : 'true'
+        },
+        body: f
       });
       if (!up.ok) throw new Error(await up.text());
-      const name = f.name.replace(/\.[^.]+$/,'');
-      const parts = name.split('-').map(s=>s.trim());
+
+      // Parse name from filename — strip timestamp prefix and extension
+      const rawName = f.name.replace(/\.[^.]+$/, '');          // remove extension
+      const parts   = rawName.split('-').map(s => s.trim());
+      const songName   = cleanName(parts[0]) || rawName;
+      const artistName = parts[1] ? cleanName(parts[1]) : 'Unknown artist';
+
       await fetch(`${SUPABASE_URL}/rest/v1/songs`, {
-        method:'POST',
-        headers:{...API_HEADERS,'Prefer':'return=minimal'},
-        body:JSON.stringify({name:parts[0]||name, artist:parts[1]||'Unknown artist', file_path:safe})
+        method : 'POST',
+        headers: { ...API_HEADERS, 'Prefer': 'return=minimal' },
+        body   : JSON.stringify({ name: songName, artist: artistName, file_path: safe })
       });
+
       done++;
-      document.getElementById('up-fill').style.width = Math.round((done/arr.length)*100)+'%';
-      document.getElementById('up-count').textContent = done+'/'+arr.length;
-    } catch(e) { setStatus('Upload failed: '+e.message, false); }
+      document.getElementById('up-fill').style.width  = Math.round((done / arr.length) * 100) + '%';
+      document.getElementById('up-count').textContent = done + '/' + arr.length;
+    } catch (e) {
+      setStatus('Upload failed: ' + e.message, false);
+    }
   }
 
-  setTimeout(()=>{ area.innerHTML=''; }, 2000);
-  setStatus('Uploaded '+done+' song'+(done!==1?'s':''), true);
+  setTimeout(() => { area.innerHTML = ''; }, 2000);
+  setStatus('Uploaded ' + done + ' song' + (done !== 1 ? 's' : ''), true);
   document.getElementById('file-in').value = '';
   await loadSongs();
 }
@@ -888,31 +1029,45 @@ async function deleteSong(id, filePath, e) {
   e.stopPropagation();
   if (!isAdmin) return;
   if (!confirm('Remove this song from the shared library?')) return;
-  if (cur>=0 && tracks[cur]?.id===id) {
-    audio.pause(); audio.src=''; cur=-1;
-    document.getElementById('pp-btn').textContent='▶';
-    document.getElementById('now-name').textContent='—';
-    document.getElementById('now-artist').textContent='Select a song';
-    document.getElementById('now-art').style.background='var(--card)';
-    document.getElementById('now-dl-btn').style.display='none';
+
+  if (cur >= 0 && tracks[cur]?.id === id) {
+    audio.pause(); audio.src = ''; cur = -1;
+    document.getElementById('pp-btn').textContent    = '▶';
+    document.getElementById('now-name').textContent  = '—';
+    document.getElementById('now-artist').textContent = 'Select a song';
+    document.getElementById('now-art').style.background = 'var(--card)';
+    document.getElementById('now-dl-btn').style.display = 'none';
   }
-  await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${filePath}`,{method:'DELETE',headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}});
-  await fetch(`${SUPABASE_URL}/rest/v1/songs?id=eq.${id}`,{method:'DELETE',headers:API_HEADERS});
+
+  await fetch(`${SUPABASE_URL}/storage/v1/object/${BUCKET}/${filePath}`, {
+    method : 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+  });
+  await fetch(`${SUPABASE_URL}/rest/v1/songs?id=eq.${id}`, {
+    method : 'DELETE',
+    headers: API_HEADERS
+  });
   await loadSongs();
 }
 
 /* ── View switch ── */
 function switchView(v, el) {
   view = v;
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('view-title').textContent = v==='recent'?'Recently added':greet();
+  document.getElementById('view-title').textContent =
+    v === 'recent' ? 'Recently added' : greet();
   renderList();
 }
 
-document.addEventListener('dragover', e=>e.preventDefault());
-document.addEventListener('drop', e=>{ e.preventDefault(); if(isAdmin) handleUpload(e.dataTransfer.files); });
+/* ── Drag & drop (admin only) ── */
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => {
+  e.preventDefault();
+  if (isAdmin) handleUpload(e.dataTransfer.files);
+});
 
+/* ── Init ── */
 document.getElementById('view-title').textContent = greet();
 loadSongs();
 setInterval(loadSongs, 30000);
