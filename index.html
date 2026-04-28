@@ -35,7 +35,7 @@
     .app { display: flex; flex-direction: column; height: 100vh; }
     .layout { display: flex; flex: 1; overflow: hidden; gap: 8px; padding: 8px 8px 0; }
 
-    /* â”€â”€ Sidebar â”€â”€ */
+    /* ── Sidebar ── */
     .sidebar {
       width: 260px; flex-shrink: 0;
       background: var(--sidebar); border-radius: 10px;
@@ -84,7 +84,7 @@
     }
     .playlist-row:hover, .playlist-row.active { background: var(--card); }
 
-    /* Album art for sidebar â€” letter based */
+    /* Album art for sidebar — letter based */
     .pl-art {
       width: 40px; height: 40px; border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
@@ -95,7 +95,7 @@
     .pl-name { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .pl-meta { font-size: 11px; color: var(--text-sub); margin-top: 1px; }
 
-    /* â”€â”€ Main â”€â”€ */
+    /* ── Main ── */
     .main {
       flex: 1; background: var(--dark); border-radius: 10px;
       display: flex; flex-direction: column; overflow: hidden; min-width: 0;
@@ -175,7 +175,7 @@
 
     .t-cell { display: flex; align-items: center; gap: 11px; min-width: 0; }
 
-    /* Song album art â€” letter based, NOT spotify logo */
+    /* Song album art — letter based, NOT spotify logo */
     .t-art {
       width: 42px; height: 42px; border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
@@ -218,7 +218,7 @@
     .up-bar  { flex: 1; height: 3px; background: #535353; border-radius: 2px; overflow: hidden; }
     .up-fill { height: 100%; background: var(--green); border-radius: 2px; width: 0%; transition: width .2s; }
 
-    /* â”€â”€ Modal â”€â”€ */
+    /* ── Modal ── */
     .modal-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,.82);
       display: flex; align-items: center; justify-content: center;
@@ -271,7 +271,7 @@
     .modal-btn.cancel  { background: #303030; color: var(--text); }
     .modal-btn.cancel:hover { background: #404040; }
 
-    /* â”€â”€ Player â”€â”€ */
+    /* ── Player ── */
     .player {
       background: #0d0d0d; border-top: 1px solid #242424;
       display: flex; align-items: center;
@@ -280,7 +280,7 @@
 
     .now-playing { display: flex; align-items: center; gap: 10px; width: 240px; flex-shrink: 0; min-width: 0; }
 
-    /* Now playing art â€” letter based */
+    /* Now playing art — letter based */
     .now-art {
       width: 50px; height: 50px; border-radius: 6px;
       display: flex; align-items: center; justify-content: center;
@@ -337,7 +337,7 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     .spin{animation:spin .8s linear infinite;display:inline-block;}
 
-    /* â”€â”€ Mobile â”€â”€ */
+    /* ── Mobile ── */
     .mobile-topbar { display: none; align-items: center; justify-content: space-between; padding: 10px 16px 4px; flex-shrink: 0; }
     @media(max-width:640px){
       .mobile-topbar { display: flex; }
@@ -382,7 +382,7 @@
 </head>
 <body>
 
-<!-- â”€â”€ Password Modal â”€â”€ -->
+<!-- ── Password Modal ── -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal">
     <svg class="modal-logo" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
@@ -394,9 +394,9 @@
     <div class="modal-title">Admin Access</div>
     <div class="modal-sub">Enter the password to manage songs</div>
     <div class="pw-wrap">
-      <input class="pw-input" type="password" id="pw-input" maxlength="20" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢"
+      <input class="pw-input" type="password" id="pw-input" maxlength="20" placeholder="••••••"
         onkeydown="if(event.key==='Enter')submitPw()" autocomplete="current-password"/>
-      <button class="pw-toggle" id="pw-toggle" onclick="togglePwVis()" tabindex="-1">ðŸ‘</button>
+      <button class="pw-toggle" id="pw-toggle" onclick="togglePwVis()" tabindex="-1">👁</button>
     </div>
     <div class="pw-error" id="pw-error"></div>
     <div class="modal-actions">
@@ -420,9 +420,9 @@
       <span class="mob-logo-text">MusicShare</span>
     </div>
     <div style="display:flex;align-items:center;gap:8px;">
-      <div class="admin-badge" id="mob-admin-badge" style="font-size:11px;padding:4px 9px;">ðŸ›¡ Admin</div>
+      <div class="admin-badge" id="mob-admin-badge" style="font-size:11px;padding:4px 9px;">🛡 Admin</div>
       <button class="logout-btn" id="mob-logout-btn" onclick="logout()" style="font-size:11px;">Lock</button>
-      <label class="btn btn-green" id="mob-upload-btn" for="file-in" style="padding:6px 12px;font-size:12px;cursor:pointer;">â†‘</label>
+      <label class="btn btn-green" id="mob-upload-btn" for="file-in" style="padding:6px 12px;font-size:12px;cursor:pointer;">↑</label>
     </div>
   </div>
 
@@ -431,7 +431,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="logo">
-        <!-- MAIN LOGO â€” Spotify style SVG, click 5x for admin -->
+        <!-- MAIN LOGO — Spotify style SVG, click 5x for admin -->
         <svg class="logo-icon" id="logo-icon" viewBox="0 0 64 64"
           xmlns="http://www.w3.org/2000/svg" onclick="logoTap()">
           <circle cx="32" cy="32" r="32" fill="#1DB954"/>
@@ -447,10 +447,10 @@
 
       <nav class="nav">
         <div class="nav-item active" onclick="switchView('all',this)">
-          <div class="nav-icon">âŒ‚</div> Home
+          <div class="nav-icon">⌂</div> Home
         </div>
         <div class="nav-item" onclick="switchView('recent',this)">
-          <div class="nav-icon">âŠ™</div> Recently added
+          <div class="nav-icon">⊙</div> Recently added
         </div>
       </nav>
 
@@ -459,7 +459,7 @@
       </div>
       <div class="playlist-list" id="playlist-sidebar">
         <div style="padding:10px 8px;font-size:12px;color:var(--text-muted);">
-          <span class="spin">â†º</span> Loading...
+          <span class="spin">↺</span> Loading...
         </div>
       </div>
     </div>
@@ -473,11 +473,11 @@
             <div class="status-dot" id="status-dot"></div>
             <span id="status-txt">Connecting...</span>
           </div>
-          <div class="admin-badge" id="admin-badge">ðŸ›¡ Admin</div>
+          <div class="admin-badge" id="admin-badge">🛡 Admin</div>
           <button class="logout-btn" id="logout-btn" onclick="logout()">Lock</button>
-          <button class="btn btn-outline" onclick="loadSongs()" style="padding:7px 12px;">â†º</button>
+          <button class="btn btn-outline" onclick="loadSongs()" style="padding:7px 12px;">↺</button>
           <label class="btn btn-green" id="upload-btn" for="file-in" style="cursor:pointer;">
-            â†‘ Upload
+            ↑ Upload
             <input type="file" id="file-in" accept="audio/*" multiple
               style="display:none;" onchange="handleUpload(this.files)">
           </label>
@@ -490,13 +490,13 @@
         <div class="th">#</div>
         <div class="th">Title</div>
         <div class="th th-date">Added</div>
-        <div class="th c">â¬‡</div>
+        <div class="th c">⬇</div>
         <div class="th r">Time</div>
       </div>
 
       <div class="track-list" id="track-list">
         <div class="empty">
-          <div class="empty-icon spin">â†º</div>
+          <div class="empty-icon spin">↺</div>
           <div class="empty-text">Loading...</div>
         </div>
       </div>
@@ -506,32 +506,32 @@
   <!-- Mobile bottom nav -->
   <div class="mobile-nav-bar" id="mobile-nav-bar">
     <div class="mob-nav-item active" onclick="switchViewMob('all',this)">
-      <div class="mob-nav-icon">âŒ‚</div>Home
+      <div class="mob-nav-icon">⌂</div>Home
     </div>
     <div class="mob-nav-item" onclick="switchViewMob('recent',this)">
-      <div class="mob-nav-icon">âŠ™</div>Recent
+      <div class="mob-nav-icon">⊙</div>Recent
     </div>
   </div>
 
   <!-- Player bar -->
   <div class="player">
     <div class="now-playing">
-      <div class="now-art" id="now-art">â™ª</div>
+      <div class="now-art" id="now-art">♪</div>
       <div class="now-info">
-        <div class="now-name"   id="now-name">â€”</div>
+        <div class="now-name"   id="now-name">—</div>
         <div class="now-artist" id="now-artist">Select a song</div>
       </div>
-      <button class="heart-btn" id="heart-btn" onclick="toggleLike()">â™¡</button>
-      <button class="now-dl" id="now-dl" onclick="dlNowPlaying()" title="Download">â¬‡</button>
+      <button class="heart-btn" id="heart-btn" onclick="toggleLike()">♡</button>
+      <button class="now-dl" id="now-dl" onclick="dlNowPlaying()" title="Download">⬇</button>
     </div>
 
     <div class="center-ctrls">
       <div class="ctrl-row">
-        <button class="ctrl" id="shuf-btn" onclick="toggleShuffle()">â‡„</button>
-        <button class="ctrl" onclick="prev()">â®</button>
-        <button class="ctrl pp" id="pp-btn" onclick="togglePlay()">â–¶</button>
-        <button class="ctrl" onclick="next()">â­</button>
-        <button class="ctrl" id="rep-btn" onclick="toggleRepeat()">â†º</button>
+        <button class="ctrl" id="shuf-btn" onclick="toggleShuffle()">⇄</button>
+        <button class="ctrl" onclick="prev()">⏮</button>
+        <button class="ctrl pp" id="pp-btn" onclick="togglePlay()">▶</button>
+        <button class="ctrl" onclick="next()">⏭</button>
+        <button class="ctrl" id="rep-btn" onclick="toggleRepeat()">↺</button>
       </div>
       <div class="prog-row">
         <span class="t-lbl" id="cur-t">0:00</span>
@@ -544,7 +544,7 @@
     </div>
 
     <div class="right-ctrls">
-      <span class="vol-icon" id="vol-icon" onclick="toggleMute()">ðŸ”Š</span>
+      <span class="vol-icon" id="vol-icon" onclick="toggleMute()">🔊</span>
       <div class="vol-track" onclick="setVol(event)">
         <div class="vol-fill" id="vol-fill"></div>
       </div>
@@ -626,7 +626,7 @@ function updateAdminUI(){
   const ls=document.getElementById('logo-sub');
   if(li)li.classList.toggle('admin-active',isAdmin);
   if(ml)ml.style.filter=isAdmin?'drop-shadow(0 0 5px rgba(29,185,84,.7))':'none';
-  if(ls){ls.textContent=isAdmin?'ðŸ›¡ Admin mode':'shared library';ls.style.color=isAdmin?'var(--green)':'';}
+  if(ls){ls.textContent=isAdmin?'🛡 Admin mode':'shared library';ls.style.color=isAdmin?'var(--green)':'';}
   renderList();
 }
 function logout(){isAdmin=false;updateAdminUI();}
@@ -647,7 +647,7 @@ function submitPw(){
 }
 function togglePwVis(){
   const i=document.getElementById('pw-input'),b=document.getElementById('pw-toggle');
-  if(i.type==='password'){i.type='text';b.textContent='ðŸ™ˆ';}else{i.type='password';b.textContent='ðŸ‘';}
+  if(i.type==='password'){i.type='text';b.textContent='🙈';}else{i.type='password';b.textContent='👁';}
 }
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 
@@ -671,7 +671,7 @@ function renderList(){
   const list=document.getElementById('track-list');
   const shown=view==='recent'?tracks.slice(0,20):tracks;
   if(!shown.length){
-    list.innerHTML=`<div class="empty"><div class="empty-icon">ðŸŽµ</div><div class="empty-text">No songs yet</div><div class="empty-sub">${isAdmin?'Tap â†‘ Upload to add songs':'No songs uploaded yet'}</div></div>`;
+    list.innerHTML=`<div class="empty"><div class="empty-icon">🎵</div><div class="empty-text">No songs yet</div><div class="empty-sub">${isAdmin?'Tap ↑ Upload to add songs':'No songs uploaded yet'}</div></div>`;
     return;
   }
   const eq=`<div class="eq"><div class="eq-b" style="height:3px;"></div><div class="eq-b" style="height:8px;"></div><div class="eq-b" style="height:5px;"></div></div>`;
@@ -679,9 +679,9 @@ function renderList(){
     const ri=tracks.indexOf(t),ip=cur===ri;
     const col=getArtColor(t.name);
     const initials=getInitials(t.name);
-    const del=isAdmin?`<button class="del-btn av" onclick="delSong('${t.id}','${t.file_path}',event)" title="Remove">âœ•</button>`:'';
+    const del=isAdmin?`<button class="del-btn av" onclick="delSong('${t.id}','${t.file_path}',event)" title="Remove">✕</button>`:'';
     return`<div class="track-row${ip?' playing':''}" onclick="playTrack(${ri})">
-      <div class="t-num">${ip?eq:`<span class="ni">${i+1}</span><span class="pi">â–¶</span>`}</div>
+      <div class="t-num">${ip?eq:`<span class="ni">${i+1}</span><span class="pi">▶</span>`}</div>
       <div class="t-cell">
         <div class="t-art" style="background:${col};">${initials}</div>
         <div class="t-info">
@@ -691,7 +691,7 @@ function renderList(){
       </div>
       <div class="t-date">${timeAgo(t.created_at)}</div>
       <div style="display:flex;align-items:center;justify-content:center;">
-        <button class="dl-btn" onclick="dlSong('${t.file_path}','${esc(t.name)}',event)" title="Download">â¬‡</button>
+        <button class="dl-btn" onclick="dlSong('${t.file_path}','${esc(t.name)}',event)" title="Download">⬇</button>
       </div>
       <div class="t-actions">${del}</div>
     </div>`;
@@ -707,7 +707,7 @@ function renderSidebar(){
     const initials=getInitials(t.name);
     return`<div class="playlist-row${cur===i?' active':''}" onclick="playTrack(${i})">
       <div class="pl-art" style="background:${col};">${initials}</div>
-      <div><div class="pl-name">${esc(t.name)}</div><div class="pl-meta">Song Â· ${esc(t.artist)}</div></div>
+      <div><div class="pl-name">${esc(t.name)}</div><div class="pl-meta">Song · ${esc(t.artist)}</div></div>
     </div>`;
   }).join('');
 }
@@ -717,7 +717,7 @@ async function playTrack(i){
   cur=i;const t=tracks[i];
   if(!t.url)t.url=fileUrl(t.file_path);
   audio.src=t.url;audio.volume=muted?0:vol;
-  try{await audio.play();document.getElementById('pp-btn').textContent='â¸';}
+  try{await audio.play();document.getElementById('pp-btn').textContent='⏸';}
   catch(e){setStatus('Playback error',false);}
   document.getElementById('now-name').textContent=t.name;
   document.getElementById('now-artist').textContent=t.artist;
@@ -728,16 +728,16 @@ async function playTrack(i){
   updateHeart();renderList();renderSidebar();
 }
 
-function togglePlay(){if(cur<0&&tracks.length>0){playTrack(0);return;}if(cur<0)return;if(audio.paused){audio.play();document.getElementById('pp-btn').textContent='â¸';}else{audio.pause();document.getElementById('pp-btn').textContent='â–¶';renderList();}}
+function togglePlay(){if(cur<0&&tracks.length>0){playTrack(0);return;}if(cur<0)return;if(audio.paused){audio.play();document.getElementById('pp-btn').textContent='⏸';}else{audio.pause();document.getElementById('pp-btn').textContent='▶';renderList();}}
 function next(){if(!tracks.length)return;playTrack(shuffle?Math.floor(Math.random()*tracks.length):(cur+1)%tracks.length);}
 function prev(){if(!tracks.length)return;if(audio.currentTime>3){audio.currentTime=0;return;}playTrack((cur-1+tracks.length)%tracks.length);}
 function seek(e){if(!audio.duration)return;const r=e.currentTarget.getBoundingClientRect();audio.currentTime=((e.clientX-r.left)/r.width)*audio.duration;}
-function setVol(e){const r=e.currentTarget.getBoundingClientRect();vol=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));audio.volume=vol;muted=false;document.getElementById('vol-fill').style.width=(vol*100)+'%';document.getElementById('vol-icon').textContent=vol<.3?'ðŸ”ˆ':vol<.7?'ðŸ”‰':'ðŸ”Š';}
-function toggleMute(){muted=!muted;audio.volume=muted?0:vol;document.getElementById('vol-icon').textContent=muted?'ðŸ”‡':vol<.3?'ðŸ”ˆ':'ðŸ”Š';document.getElementById('vol-fill').style.width=muted?'0%':(vol*100)+'%';}
+function setVol(e){const r=e.currentTarget.getBoundingClientRect();vol=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));audio.volume=vol;muted=false;document.getElementById('vol-fill').style.width=(vol*100)+'%';document.getElementById('vol-icon').textContent=vol<.3?'🔈':vol<.7?'🔉':'🔊';}
+function toggleMute(){muted=!muted;audio.volume=muted?0:vol;document.getElementById('vol-icon').textContent=muted?'🔇':vol<.3?'🔈':'🔊';document.getElementById('vol-fill').style.width=muted?'0%':(vol*100)+'%';}
 function toggleShuffle(){shuffle=!shuffle;document.getElementById('shuf-btn').classList.toggle('active',shuffle);}
 function toggleRepeat(){repeat=!repeat;audio.loop=repeat;document.getElementById('rep-btn').classList.toggle('active',repeat);}
 function toggleLike(){if(cur<0)return;if(liked.has(cur))liked.delete(cur);else liked.add(cur);updateHeart();}
-function updateHeart(){const b=document.getElementById('heart-btn');b.textContent=liked.has(cur)?'â™¥':'â™¡';b.classList.toggle('liked',liked.has(cur));}
+function updateHeart(){const b=document.getElementById('heart-btn');b.textContent=liked.has(cur)?'♥':'♡';b.classList.toggle('liked',liked.has(cur));}
 
 audio.addEventListener('timeupdate',()=>{
   if(!audio.duration)return;
@@ -747,7 +747,7 @@ audio.addEventListener('timeupdate',()=>{
   document.getElementById('cur-t').textContent=fmt(audio.currentTime);
   document.getElementById('dur-t').textContent=fmt(audio.duration);
 });
-audio.addEventListener('ended',()=>{document.getElementById('pp-btn').textContent='â–¶';if(!repeat)next();});
+audio.addEventListener('ended',()=>{document.getElementById('pp-btn').textContent='▶';if(!repeat)next();});
 
 async function dlSong(fp,name,e){
   if(e){e.stopPropagation();e.preventDefault();}
@@ -789,10 +789,10 @@ async function delSong(id,fp,e){
   e.stopPropagation();if(!isAdmin)return;if(!confirm('Remove this song for everyone?'))return;
   if(cur>=0&&tracks[cur]?.id===id){
     audio.pause();audio.src='';cur=-1;
-    document.getElementById('pp-btn').textContent='â–¶';
-    document.getElementById('now-name').textContent='â€”';
+    document.getElementById('pp-btn').textContent='▶';
+    document.getElementById('now-name').textContent='—';
     document.getElementById('now-artist').textContent='Select a song';
-    document.getElementById('now-art').textContent='â™ª';
+    document.getElementById('now-art').textContent='♪';
     document.getElementById('now-art').style.background='var(--card)';
     document.getElementById('now-dl').classList.remove('visible');
   }
